@@ -5,9 +5,6 @@ public class Expendedora {
 
         String[] snacks = new String[17];
 
-
-        // Armar un arreglo de 2 dimensiones, una dimension con numeros y otra con los snacks
-        snacks[0]= "void";
         snacks[1]= "Chocolate";
         snacks[2]= "Alfajor";
         snacks[3]= "Don Satur";
@@ -25,6 +22,24 @@ public class Expendedora {
         snacks[15]= "Doritos";
         snacks[16]= "Chetos";
 
+        Double[] prices = new Double[17];
+
+        prices[1]= 3.0;
+        prices[2]= 3.5;
+        prices[3]= 4.0;
+        prices[4]= 5.0;
+        prices[5]= 5.0;
+        prices[6]= 2.0;
+        prices[7]= 1.0;
+        prices[8]= 3.0;
+        prices[9]= 2.0;
+        prices[10]= 5.0;
+        prices[11]= 2.5;
+        prices[12]= 4.0;
+        prices[13]= 2.5;
+        prices[14]= 6.0;
+        prices[15]= 4.5;
+        prices[16]= 3.8;
 
         System.out.println("Ingrese un número del 1 al 16:");
 
@@ -33,7 +48,10 @@ public class Expendedora {
         if (sc.hasNextInt()){
             int number1 = sc.nextInt();
             if(number1 >= 0 && number1 < snacks.length){
-                System.out.println("Haz seleccionado un: " + snacks[number1]);
+                System.out.println("Haz seleccionado un/a: " + snacks[number1]);
+                System.out.println("El precio es de " + prices[number1] + "$\n\nIngrese dinero: ");
+                double dinero = 4;
+                System.out.println(payment(dinero,prices[number1]));
             } else{
                 System.out.println("El número " + number1 + " no es válido");
             }
@@ -41,6 +59,14 @@ public class Expendedora {
             double number2 = sc.nextDouble();
             System.out.println("El número " + number2 + " no es válido");
         }
+    }
 
+    public static String payment(double dinero, double precio){
+        if (dinero > precio){
+            double variable1 = dinero - precio;
+            return "Tu vuelto es de " + variable1 + "$";
+        }else {
+            return "El dinero ingresado no es suficiente";
+        }
     }
 }
