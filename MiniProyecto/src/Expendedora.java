@@ -49,9 +49,23 @@ public class Expendedora {
             int number1 = sc.nextInt();
             if(number1 >= 0 && number1 < snacks.length){
                 System.out.println("Haz seleccionado un/a: " + snacks[number1]);
-                System.out.println("El precio es de " + prices[number1] + "$\n\nIngrese dinero: ");
-                double dinero = 4;
-                System.out.println(payment(dinero,prices[number1]));
+                System.out.println("El precio es de : " + prices[number1]);
+                int buy = 0;
+
+                do {
+                    System.out.println("\n¿Confirma la compra?\n 0=No/1=Si");//<-Meter un LOOP aca???
+                    Scanner scn = new Scanner(System.in);
+                    buy = scn.nextInt();
+                } while (buy != 0 && buy!= 1);//<- Agregar otro valor para acceder a un for que valla sumando t
+
+                if (buy == 1) {
+                    System.out.println("Ingrese dinero: ");
+                    Scanner scn = new Scanner(System.in);
+                    double money = Double.valueOf(scn.nextLine());
+                    System.out.println(payment(money, prices[number1]));
+                } else {
+                    System.out.println("La compra se ha cancelado");
+                }
             } else{
                 System.out.println("El número " + number1 + " no es válido");
             }
@@ -62,9 +76,9 @@ public class Expendedora {
     }
 
     public static String payment(double dinero, double precio){
-        if (dinero > precio){
+        if (dinero >= precio){
             double variable1 = dinero - precio;
-            return "Tu vuelto es de " + variable1 + "$";
+            return "Tu vuelto es de " + variable1 + "$\nGracias por tu compra!";
         }else {
             return "El dinero ingresado no es suficiente";
         }
