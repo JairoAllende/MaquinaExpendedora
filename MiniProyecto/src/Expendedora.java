@@ -1,6 +1,27 @@
 import java.util.Scanner;
 
 public class Expendedora {
+    public static Double price(int cantidad, double precio){
+        double variable1 = cantidad * precio;
+        return variable1;
+    }
+
+    /**
+     *Descripción:Función que ingresando el dinero y especificando el precio del producto, se informa el vuelto
+     *
+     * @param dinero Dinero ingresado por el usuario
+     * @param precio El precio del producto que se elige
+     * @return en caso de que el dinero ingresado no sea suficiente, se le informa al usuario
+     * */
+    public static String payment(double dinero, double precio){
+        if (dinero >= precio){
+            double vuelto = dinero - precio;
+            return "Tu vuelto es de " + vuelto + "$\nGracias por tu compra!";
+        }else {
+            return "El dinero ingresado no es suficiente";
+        }
+    }
+
     public static void main(String[] args){
 
         String[] snacks = new String[17];
@@ -44,25 +65,31 @@ public class Expendedora {
         System.out.println("Ingrese un número del 1 al 16:");
 
         Scanner sc = new Scanner(System.in);
+        double var1;
 
         if (sc.hasNextInt()){
             int number1 = sc.nextInt();
+            int buy = 0;
+            int quantity = 0;
+
             if(number1 >= 0 && number1 < snacks.length){
-                System.out.println("Haz seleccionado un/a: " + snacks[number1]);
-                System.out.println("El precio es de : " + prices[number1]);
-                int buy = 0;
+                System.out.println("\nHaz seleccionado un/a: " + snacks[number1]);
+                System.out.println("El precio de es: " + prices[number1] + "$");
+
+                System.out.println("¿Cuántos deseas comprar?");
+                quantity = sc.nextInt();
+                System.out.println("\nEl precio total es de " + price(quantity, prices[number1]) + "$");
 
                 do {
-                    System.out.println("\n¿Confirma la compra?\n 0=No/1=Si");//<-Meter un LOOP aca???
-                    Scanner scn = new Scanner(System.in);
-                    buy = scn.nextInt();
-                } while (buy != 0 && buy!= 1);//<- Agregar otro valor para acceder a un for que valla sumando t
+                    System.out.println("¿Confirma la compra?\n 0=No/1=Si");//<-Meter un LOOP aca???
+                    buy = sc.nextInt();
+                } while (buy != 0 && buy!= 1);
 
                 if (buy == 1) {
-                    System.out.println("Ingrese dinero: ");
-                    Scanner scn = new Scanner(System.in);
-                    double money = Double.valueOf(scn.nextLine());
-                    System.out.println(payment(money, prices[number1]));
+                    System.out.println("\nIngrese dinero: ");
+                    Scanner scn = new Scanner(System.in);//<- for?
+                    double money = scn.nextDouble();
+                    System.out.println("\n" + payment(money, price(quantity, prices[number1])));
                 } else {
                     System.out.println("La compra se ha cancelado");
                 }
@@ -72,15 +99,6 @@ public class Expendedora {
         } else if(sc.hasNextDouble()) {
             double number2 = sc.nextDouble();
             System.out.println("El número " + number2 + " no es válido");
-        }
-    }
-
-    public static String payment(double dinero, double precio){
-        if (dinero >= precio){
-            double variable1 = dinero - precio;
-            return "Tu vuelto es de " + variable1 + "$\nGracias por tu compra!";
-        }else {
-            return "El dinero ingresado no es suficiente";
         }
     }
 }
